@@ -26,3 +26,6 @@ Thumbs.db
 # Private drivers (excluded)
 app/Services/MangaScraping/Drivers/Local/
 app/Services/NovelScraping/Drivers/Local/
+/config/manga_scrapers.local.php
+/public/images/sites/
+!/public/images/sites/.gitkeep
