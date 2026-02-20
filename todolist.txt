@@ -1,0 +1,35 @@
+.
+├── app/
+│   ├── Actions/{Manga,Novel}/Scrape*FromUrl.php
+│   ├── Console/Commands/RefreshScrapedContent.php
+│   ├── Contracts/{Manga,Novel}SiteDriver.php
+│   ├── Events/ScheduleBatchFinishedWithUpdates.php
+│   ├── Filament/
+│   │   ├── Pages/{LatestScrapeUpdates,MangaReader,NovelReader,SupportedSites}.php
+│   │   ├── Resources/
+│   │   │   └── {ChapterImages,Chapters,FollowedSeries,Mangas,NovelChapters,Novels}/
+│   │   │       ├── *Resource.php
+│   │   │       ├── Pages/{Create,Edit,List}*.php
+│   │   │       ├── Schemas/*Form.php
+│   │   │       └── Tables/*Table.php
+│   │   ├── Tables/AbstractResourceTable.php
+│   │   └── Widgets/ScrapeRunStatusWidget.php
+│   ├── Jobs/Scrape{Manga,MangaChapterImages,Novel,NovelChapterContent}Job.php
+│   ├── Listeners/SendTelegramUpdates.php
+│   ├── Models/{Chapter,ChapterImage,FollowedSeries,Manga,Novel,NovelChapter,ScrapeRun,ScrapeRunEvent,User}.php
+│   ├── Observers/{Chapter,NovelChapter}Observer.php
+│   ├── Providers/
+│   │   ├── {App,Event}ServiceProvider.php
+│   │   ├── {Manga,Novel}ScrapingServiceProvider.php
+│   │   └── Filament/AdminPanelProvider.php
+│   └── Services/
+│       ├── {Manga,Novel}Scraping/
+│       │   ├── DriverResolver.php
+│       │   └── Drivers/*.php
+│       └── Telegram/TelegramServices.php
+├── docker-compose.yml
+├── Dockerfile
+└── README.md
+
+app/Services/MangaScraping/Drivers/*Driver.php
+app/Services/NovelScraping/Drivers/*Driver.php
