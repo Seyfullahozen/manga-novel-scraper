@@ -26,4 +26,19 @@ class MangaScrapingServiceProvider extends ServiceProvider
         });
 
     }
+
+    private function classFromFile(string $path): ?string
+    {
+        $contents = file_get_contents($path);
+
+        if (! preg_match('/namespace\s+(.+?);/', $contents, $namespaceMatch)) {
+            return null;
+        }
+
+        if (! preg_match('/class\s+([^\s]+)/', $contents, $classMatch)) {
+            return null;
+        }
+
+        return $namespaceMatch[1] . '\\' . $classMatch[1];
+    }
 }
