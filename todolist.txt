@@ -33,3 +33,18 @@
 
 app/Services/MangaScraping/Drivers/*Driver.php
 app/Services/NovelScraping/Drivers/*Driver.php
+
+docker compose exec web sh -c "cat > config/novel_scrapers.local.php << 'EOF'
+<?php
+
+return [
+    'drivers' => [
+        App\Services\NovelScraping\Drivers\Local\EmpireNovelDriver::class,
+        App\Services\NovelScraping\Drivers\Local\NovelbinDriver::class,
+        App\Services\NovelScraping\Drivers\Local\NovelOkutrDriver::class,
+        App\Services\NovelScraping\Drivers\Examples\ExampleNovelDriver::class,
+    ],
+];
+EOF"
+
+novelprovider
