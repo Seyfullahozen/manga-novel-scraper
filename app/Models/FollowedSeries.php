@@ -28,4 +28,18 @@ class FollowedSeries extends Model
     {
         return $this->morphTo();
     }
+
+    public function getFilamentTitle(): string
+    {
+        $subject = $this->subject;
+
+        if (! $subject) {
+            return (string) $this->id;
+        }
+
+        // subject modellerinde title/name ne varsa onu çekmeye çalış
+        return $subject->title
+            ?? $subject->name
+            ?? (string) $this->subject_id;
+    }
 }

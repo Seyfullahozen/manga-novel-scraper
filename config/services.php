@@ -39,4 +39,10 @@ return [
         'bot_token' => env('TELEGRAM_BOT_TOKEN'),
     ],
 
+    'translate' => [
+        'url' => env('TRANSLATE_API_URL'),
+        'token' => env('TRANSLATE_API_TOKEN'),
+        'timeout' => env('TRANSLATE_API_TIMEOUT', 30),
+    ],
+
 ];

@@ -1,0 +1,539 @@
+/* =============================================================
+   Kullanıcı Profil Sayfası
+   ============================================================= */
+
+.uprofile { max-width: 100%; }
+
+.uprofile-hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.uprofile-hero__avatar img,
+.uprofile-hero__avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.uprofile-hero__avatar-placeholder {
+    background: #1e2427;
+    border: 2px solid #2a3136;
+    color: #666;
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uprofile-hero__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.uprofile-hero__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ddd;
+    margin: 0;
+}
+
+.uprofile-hero__username {
+    font-size: 13px;
+    color: #088fe1;
+}
+
+.uprofile-hero__bio {
+    font-size: 13px;
+    color: #888;
+    margin: 4px 0 0;
+    line-height: 1.5;
+}
+
+.uprofile-hero__since {
+    font-size: 11px;
+    color: #444;
+    margin-top: 4px;
+}
+
+.uprofile-hero__actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    align-items: flex-start;
+}
+
+.uprofile-follow-btn,
+.uprofile-block-btn,
+.uprofile-edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid;
+    transition: all .15s;
+    text-decoration: none;
+}
+
+.uprofile-follow-btn {
+    background: transparent;
+    border-color: #088fe1;
+    color: #088fe1;
+}
+
+.uprofile-follow-btn:hover,
+.uprofile-follow-btn--active {
+    background: #088fe1;
+    color: #fff;
+}
+
+.uprofile-block-btn {
+    background: transparent;
+    border-color: #2a3136;
+    color: #555;
+}
+
+.uprofile-block-btn:hover { border-color: #f44336; color: #f44336; }
+.uprofile-block-btn--active { border-color: #f44336; color: #f44336; background: rgba(244,67,54,.08); }
+
+.uprofile-edit-btn {
+    background: transparent;
+    border-color: #2a3136;
+    color: #888;
+}
+
+.uprofile-edit-btn:hover { border-color: #444; color: #ccc; }
+
+/* İstatistikler */
+.uprofile-stats {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.uprofile-stat {
+    flex: 1;
+    min-width: 80px;
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.uprofile-stat__val {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ccc;
+}
+
+.uprofile-stat__label {
+    display: block;
+    font-size: 11px;
+    color: #444;
+    margin-top: 2px;
+}
+
+/* Sekmeler */
+.uprofile-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.uprofile-tab {
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 20px;
+    border: 1px solid #2a3136;
+    background: transparent;
+    color: #555;
+    cursor: pointer;
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.uprofile-tab:hover { border-color: #444; color: #aaa; }
+.uprofile-tab--active { background: #088fe1; border-color: #088fe1; color: #fff; }
+
+/* Panel */
+.uprofile-panel--hidden { display: none; }
+
+/* Yorum kartı */
+.uprofile-comment-card {
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+}
+
+.uprofile-comment-card__source {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.uprofile-comment-card__series { font-size: 12px; color: #088fe1; text-decoration: none; }
+.uprofile-comment-card__series:hover { text-decoration: underline; }
+.uprofile-comment-card__series--dead { font-size: 12px; color: #444; }
+.uprofile-comment-card__date { font-size: 11px; color: #444; margin-left: auto; }
+
+.uprofile-comment-card__body {
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+.uprofile-comment-card__stats {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: #444;
+}
+
+/* Engelleme */
+.uprofile-blocked-comment {
+    background: #0e1518;
+    border: 1px dashed #2a3136;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.uprofile-blocked-show {
+    margin-left: auto;
+    font-size: 11px;
+    color: #088fe1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.uprofile-blocked-show:hover { text-decoration: underline; }
+
+/* Seri kartı */
+.uprofile-series-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.uprofile-series-card__cover {
+    width: 40px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.uprofile-series-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.uprofile-series-card__title {
+    font-size: 13px;
+    color: #bbb;
+    text-decoration: none;
+}
+
+.uprofile-series-card__title:hover { color: #088fe1; }
+
+/* User kartı */
+.uprofile-user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.uprofile-user-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.uprofile-user-card__avatar--placeholder {
+    background: #1e2427;
+    color: #666;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uprofile-user-card__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.uprofile-user-card__name { font-size: 13px; color: #ccc; font-weight: 600; }
+.uprofile-user-card__username { font-size: 11px; color: #444; }
+
+.uprofile-user-card__link {
+    font-size: 11px;
+    color: #088fe1;
+    text-decoration: none;
+    border: 1px solid rgba(8,143,225,.3);
+    padding: 3px 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.uprofile-user-card__link:hover { background: rgba(8,143,225,.1); }
+
+/* comment-item içinde username linki */
+a.comment-username {
+    color: inherit;
+    text-decoration: none;
+}
+a.comment-username:hover { color: #088fe1; text-decoration: underline; }
+
+/* =============================================================
+   Arkadaşlarım sayfası — arama
+   ============================================================= */
+.friends-search-wrap {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.friends-search-input {
+    width: 100%;
+    background: #0e1518;
+    border: 1px solid #2a3136;
+    border-radius: 6px;
+    color: #ccc;
+    padding: 9px 14px;
+    font-size: 13px;
+    box-sizing: border-box;
+    transition: border-color .15s;
+}
+
+.friends-search-input:focus { outline: none; border-color: #088fe1; }
+
+.friends-search-results {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #0e1518;
+    border: 1px solid #2a3136;
+    border-radius: 6px;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    overflow: hidden;
+}
+
+.friends-search-result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    text-decoration: none;
+    border-bottom: 1px solid #111618;
+    transition: background .12s;
+}
+
+.friends-search-result:last-child { border-bottom: none; }
+.friends-search-result:hover { background: #111a1e; }
+
+.friends-search-result__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.friends-search-result__avatar--placeholder {
+    background: #1e2427;
+    color: #666;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.friends-search-result__name { font-size: 13px; color: #ccc; display: block; font-weight: 600; }
+.friends-search-result__username { font-size: 11px; color: #444; }
+
+.friends-search-empty { padding: 14px; text-align: center; font-size: 12px; color: #444; }
+
+.friends-panel--hidden { display: none; }
+
+/* =============================================================
+   Yorum engelleme bildirimi
+   ============================================================= */
+.comment-blocked-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #0a1215;
+    border: 1px dashed #1e2427;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #444;
+}
+
+.comment-blocked-notice--reply {
+    margin-left: 32px;
+}
+
+.comment-blocked-notice .fa-ban { color: #f44336; opacity: .5; }
+
+.comment-blocked-show-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 11px;
+    color: #088fe1;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.comment-blocked-show-btn:hover { text-decoration: underline; }
+
+/* =============================================================
+   @mention dropdown
+   ============================================================= */
+.mention-dropdown {
+    position: absolute;
+    z-index: 9999;
+    background: #0e1518;
+    border: 1px solid #2a3136;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    overflow: hidden;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.mention-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #111618;
+    transition: background .1s;
+}
+
+.mention-item:last-child { border-bottom: none; }
+.mention-item:hover { background: #111a1e; }
+
+.mention-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.mention-avatar--placeholder {
+    background: #1e2427;
+    color: #666;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mention-name  { font-size: 13px; color: #088fe1; font-weight: 600; }
+.mention-display { font-size: 11px; color: #444; margin-left: 2px; }
+
+/* mention bildirim rengi */
+.notif-card__icon--mention { background: rgba(147,51,234,.15); color: #9333ea; }
+.notif-card__action--mention { color: #9333ea; }
+
+/* user_social.css'e ekle */
+
+.uprofile-load-more-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 8px;
+}
+
+.uprofile-load-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid #2a3136;
+    border-radius: 20px;
+    color: #888;
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+}
+
+.uprofile-load-more:hover {
+    border-color: #088fe1;
+    color: #088fe1;
+    background: rgba(8,143,225,.05);
+}
+
+.uprofile-load-more:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.uprofile-load-more__count {
+    color: #555;
+    font-size: 11px;
+}

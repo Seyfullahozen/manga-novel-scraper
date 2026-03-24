@@ -1,0 +1,454 @@
+/* =============================================================
+   Show sayfası — okumaya başla butonu
+   ============================================================= */
+
+/* Takip butonu */
+.novel-hero__follow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 0;
+    width: 100%;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 4px;
+    color: #aaa;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.novel-hero__follow-btn:hover {
+    background: rgba(8,143,225,.12);
+    border-color: rgba(8,143,225,.3);
+    color: #088fe1;
+}
+
+.novel-hero__follow-btn--active {
+    background: rgba(103,215,75,.1);
+    border-color: rgba(103,215,75,.3);
+    color: #67d74b;
+}
+
+.novel-hero__follow-btn--active:hover {
+    background: rgba(224,80,80,.1);
+    border-color: rgba(224,80,80,.3);
+    color: #e05050;
+}
+
+.novel-hero__follow-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* =============================================================
+   Novel Hero — show sayfası
+   ============================================================= */
+.novel-hero {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+/* Arka plan blur */
+.novel-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    filter: blur(18px) brightness(.25);
+    transform: scale(1.08);
+    z-index: 0;
+}
+
+.novel-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 28px;
+    padding: 28px 24px;
+}
+
+/* --- Kapak --- */
+.novel-hero__cover {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 160px;
+}
+
+.novel-hero__cover-img {
+    width: 160px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.6);
+    display: block;
+}
+
+.novel-hero__start-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 0;
+    background: #088fe1;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .15s;
+}
+
+.novel-hero__start-btn:hover { background: #0779bf; }
+
+.novel-hero__bookmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 0;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 4px;
+    color: #aaa;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .15s, color .15s, border-color .15s;
+    width: 100%;
+}
+
+.novel-hero__bookmark:hover,
+.novel-hero__bookmark.active {
+    background: rgba(255,200,0,.1);
+    border-color: rgba(255,200,0,.3);
+    color: #ffc800;
+}
+
+.novel-hero__bookmark.active .fa::before { content: "\f02e"; }
+
+/* --- Bilgiler --- */
+.novel-hero__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.novel-hero__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Meta pills */
+.novel-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.novel-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    font-size: 11px;
+    color: #999;
+}
+
+.novel-meta-pill--chapters { color: #67d74b; border-color: rgba(103,215,75,.25); background: rgba(103,215,75,.07); }
+.novel-meta-pill--status   { color: #088fe1; border-color: rgba(8,143,225,.25);  background: rgba(8,143,225,.07); }
+.novel-meta-pill .fa { font-size: 10px; }
+
+/* Manga pill */
+.novel-meta-pill--manga {
+    color: #e07b30;
+    border-color: rgba(224,123,48,.25);
+    background: rgba(224,123,48,.07);
+}
+
+/* Novel pill */
+.novel-meta-pill--novel { color: #088fe1; border-color: rgba(8,143,225,.25);  background: rgba(8,143,225,.07); }
+
+/* Yıldız puanı */
+.novel-hero__rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.novel-stars { display: flex; gap: 3px; cursor: pointer; }
+
+.novel-star {
+    font-size: 22px;
+    color: #333;
+    transition: color .1s, transform .1s;
+    line-height: 1;
+}
+
+.novel-star--filled { color: #ffc800; }
+.novel-star--hover  { color: #ffe066; transform: scale(1.15); }
+
+.novel-rating-text {
+    font-size: 13px;
+    color: #888;
+}
+
+.novel-rating-text strong { color: #ffc800; font-size: 16px; }
+.novel-rating-count { font-size: 11px; color: #555; margin-left: 4px; }
+
+/* Türler */
+.novel-hero__genres {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.novel-genre-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.novel-genre-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid #2a3136;
+    border-radius: 3px;
+    font-size: 11px;
+    color: #777;
+}
+
+.novel-genre-tag--placeholder {
+    border-style: dashed;
+    color: #555;
+}
+
+/* Açıklama */
+.novel-hero__desc {
+    background: rgba(0,0,0,.2);
+    border-left: 2px solid #2a3136;
+    border-radius: 0 4px 4px 0;
+    padding: 12px 14px;
+}
+
+.novel-desc-content p {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.novel-desc-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #555 !important;
+    font-style: italic;
+}
+
+/* Auth bilgisi */
+.novel-auth-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+.novel-auth-notice .fa { color: #444; }
+.novel-auth-notice a { color: #088fe1; text-decoration: none; }
+.novel-auth-notice a:hover { text-decoration: underline; }
+
+.novel-auth-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* =============================================================
+   Yarım yıldız sistemi
+   ============================================================= */
+.novel-stars {
+    display: flex;
+    gap: 2px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.novel-star {
+    position: relative;
+    display: inline-flex;
+    font-size: 24px;
+    line-height: 1;
+}
+
+/* Sol yarı (◐) ve sağ yarı (★) */
+.novel-star__half {
+    color: #2a3136;
+    transition: color .08s;
+    line-height: 1;
+}
+
+.novel-star__half--left {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    font-size: 24px;
+}
+
+.novel-star__half--right {
+    display: block;
+}
+
+.novel-star__half--filled {
+    color: #ffc800;
+}
+
+.novel-star__half--hover {
+    color: #ffe066;
+    transform: scale(1.1);
+}
+
+.novel-rating-text {
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.novel-rating-text strong {
+    color: #ffc800;
+    font-size: 18px;
+}
+
+.novel-rating-count {
+    font-size: 11px;
+    color: #555;
+}
+
+.novel-rating-yours {
+    font-size: 11px;
+    color: #67d74b;
+    margin-left: 4px;
+}
+
+/* =============================================================
+   Chapter listesi — yeni badge
+   ============================================================= */
+.chapter-list__new-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    background: rgba(103,215,75,.15);
+    border: 1px solid rgba(103,215,75,.3);
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #67d74b;
+    margin-left: auto;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+
+/* =============================================================
+   Show sayfası — show.css'e ekle
+   ============================================================= */
+
+/* Okuma ilerlemesi — desc altında */
+.reading-progress {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: rgba(8, 143, 225, .06);
+    border: 1px solid rgba(8, 143, 225, .15);
+    border-radius: 6px;
+}
+
+.reading-progress__bar {
+    height: 4px;
+    background: rgba(255,255,255,.08);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 7px;
+}
+
+.reading-progress__fill {
+    height: 100%;
+    background: linear-gradient(90deg, #088fe1, #5bb8f5);
+    border-radius: 3px;
+    transition: width .4s ease;
+}
+
+.reading-progress__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.reading-progress__label {
+    font-size: 11px;
+    color: #777;
+    white-space: nowrap;
+}
+
+.reading-progress__continue-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #088fe1;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border: 1px solid rgba(8,143,225,.35);
+    border-radius: 4px;
+    transition: background .15s, color .15s;
+}
+
+.reading-progress__continue-btn:hover {
+    background: rgba(8,143,225,.12);
+    color: #5bb8f5;
+}
+
+/* Chapter listesi — kaldığın yer satırı */
+.chapter-list__item--last-read {
+    background: rgba(8, 143, 225, .06);
+    border-left: 2px solid #088fe1;
+}
+
+.chapter-list__read-badge {
+    display: inline-block;
+    background: rgba(8, 143, 225, .15);
+    color: #088fe1;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: auto;
+    flex-shrink: 0;
+}

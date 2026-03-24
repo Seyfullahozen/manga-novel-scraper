@@ -64,7 +64,7 @@ class ScrapeMangaChapterImagesJob implements ShouldQueue, ShouldBeUnique
         }
 
         foreach ($images as $image) {
-            ChapterImage::updateOrCreate(
+            $chapterImage = ChapterImage::updateOrCreate(
                 [
                     'chapter_id' => $chapter->id,
                     'order' => $image['order'],
@@ -74,7 +74,26 @@ class ScrapeMangaChapterImagesJob implements ShouldQueue, ShouldBeUnique
                     'url' => $image['url'],
                 ]
             );
+
+            // Spatie ile media olarak kaydet
+            try {
+                $mangaSlug = $chapter->manga->slug;
+                $chapterNumber = str_pad($chapter->chapter_number, 4, '0', STR_PAD_LEFT);
+                $imageNumber = str_pad($image['order'], 3, '0', STR_PAD_LEFT);
+
+                $chapter->addMediaFromUrl($image['url'])
+                    ->usingFileName("{$mangaSlug}_bolum-{$chapterNumber}_sayfa-{$imageNumber}.webp")
+                    ->toMediaCollection('chapter-images');
+            } catch (\Throwable $e) {
+                \Log::warning('Media kayıt hatası', [
+                    'chapter_id' => $chapter->id,
+                    'order' => $image['order'],
+                    'url' => $image['url'],
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
+
         $chapter = Chapter::with('manga')->findOrFail($this->chapterId);
         $chapter->update(['is_scraped' => true]);
         // ✅ parent manga scraped_at güncelle

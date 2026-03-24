@@ -7,12 +7,14 @@ use App\Filament\Resources\Novels\Pages\EditNovel;
 use App\Filament\Resources\Novels\Pages\ListNovels;
 use App\Filament\Resources\Novels\Schemas\NovelForm;
 use App\Filament\Resources\Novels\Tables\NovelsTable;
+use App\Models\NovelChapter;
 use App\Models\Novel;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 use UnitEnum;
 
 class NovelResource extends Resource
@@ -54,5 +56,20 @@ class NovelResource extends Resource
     public static function canEdit($record): bool
     {
         return false;
+    }
+
+    public static function getGlobalSearchResultUrl(EloquentModel $record): ?string
+    {
+        $firstChapterNumber = NovelChapter::query()
+            ->where('novel_id', $record->getKey())
+            ->min('chapter_number');
+
+        $params = ['novel_id' => $record->getKey()];
+
+        if ($firstChapterNumber !== null) {
+            $params['chapter'] = (int) $firstChapterNumber;
+        }
+
+        return route('filament.admin.pages.novel-reader', $params);
     }
 }

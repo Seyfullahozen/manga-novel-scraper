@@ -1,0 +1,413 @@
+/* =============================================================
+   A-Z filtre
+   ============================================================= */
+.dlab-alfabe-liste {
+    display: none;
+}
+
+.dlab-alfabe-liste[data-index="#first"] {
+    display: block;
+}
+
+/* =============================================================
+   Index sayfası — archives kutusu
+   ============================================================= */
+.right .section-left {
+    width: 800px;
+    margin-left: 0;
+}
+
+/* =============================================================
+   Novel Section — genel bölüm sarmalayıcısı
+   ============================================================= */
+.novel-section {
+    margin-top: 16px;
+}
+
+.novel-section-header {
+    background: #343c3f;
+    border-radius: 3px;
+    padding: 0 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.novel-section-header h1,
+.novel-section-header h2 {
+    font-size: 13px;
+    font-weight: normal;
+    color: #999;
+    line-height: 32px;
+    margin: 0;
+}
+
+.novel-section-header .chapter-count {
+    opacity: .6;
+    font-size: 13px;
+}
+
+/* =============================================================
+   Menu — ikon + text hizalama
+   ============================================================= */
+.menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.menu ul li a img {
+    width: 22px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+/* =============================================================
+   Yukarı Çık butonu
+   ============================================================= */
+.yukari-cik {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+
+    /* Sadece ikon genişliği kadar görünür */
+    width: 15px;
+    transition: width .3s ease;
+}
+
+.yukari-cik img {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.yukari-cik-yazi {
+    white-space: nowrap;
+    opacity: 0;
+    font-size: 13px;
+    transition: opacity .2s ease .1s; /* genişleme başladıktan biraz sonra belir */
+}
+
+/* Hover: yazı kadar genişle */
+.yukari-cik:hover {
+    width: 80px; /* ikon (40px) + gap + "Yukarı Çık" yazısı */
+}
+
+.yukari-cik:hover .yukari-cik-yazi {
+    opacity: 1;
+}
+
+/* =============================================================
+   Takip Listesi sayfası
+   ============================================================= */
+.followed-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 60px 20px;
+    color: #555;
+    text-align: center;
+}
+
+.followed-empty__icon {
+    font-size: 40px;
+    color: #333;
+}
+
+.followed-empty p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.followed-empty__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    background: #088fe1;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background .15s;
+}
+
+.followed-empty__btn:hover { background: #0779bf; }
+
+/* Kart altındaki meta — bölüm sayısı + takibi bırak */
+.novel-list-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 5px 8px;
+    font-size: 11px;
+    color: #888;
+    background: rgba(0,0,0,.3);
+    border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.followed-unfollow-btn {
+    background: transparent;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    padding: 2px 4px;
+    font-size: 11px;
+    border-radius: 3px;
+    transition: color .15s, background .15s;
+    line-height: 1;
+}
+
+.followed-unfollow-btn:hover {
+    color: #e05050;
+    background: rgba(224,80,80,.1);
+}
+
+/* =============================================================
+   Popüler sekmeler
+   ============================================================= */
+.most-tab__tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #2a3136;
+    margin-bottom: 0;
+}
+
+.most-tab__tab {
+    flex: 1;
+    text-align: center;
+}
+
+.most-tab__tab a {
+    display: block;
+    padding: 7px 4px;
+    font-size: 11px;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+    white-space: nowrap;
+}
+
+.most-tab__tab:hover a { color: #aaa; }
+
+.most-tab__tab.active a {
+    color: #088fe1;
+    border-bottom-color: #088fe1;
+}
+
+.most-tab__content--hidden { display: none; }
+
+.most-tab__empty {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    font-style: italic;
+}
+
+/* =============================================================
+   Okuma geçmişi kartı
+   ============================================================= */
+.history-chapter-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #088fe1;
+    text-decoration: none;
+    transition: color .15s;
+}
+
+.history-chapter-link:hover { color: #5bb8f5; }
+
+.history-time {
+    font-size: 10px;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* =============================================================
+   Haftalık popüler — badge ve boş durum
+   ============================================================= */
+
+
+.novel-section-header__sub {
+    font-size: 11px;
+    color: #666;
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+.weekly-empty {
+    padding: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* =============================================================
+   İçerik tipi filtre tabları
+   ============================================================= */
+.novel-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.content-type-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.content-type-tab {
+    padding: 4px 12px;
+    background: transparent;
+    border: 1px solid #2a3136;
+    border-radius: 20px;
+    color: #666;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all .15s;
+    line-height: 1.4;
+}
+
+.content-type-tab:hover {
+    border-color: #444;
+    color: #aaa;
+}
+
+.content-type-tab--active {
+    background: #088fe1;
+    border-color: #088fe1;
+    color: #fff !important;
+}
+
+
+/* =============================================================
+   Popular content — Novel/Manga toggle
+   ============================================================= */
+.most-tab__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.most-tab__header h3 {
+    margin: 0;
+}
+
+.pop-type-toggle {
+    display: flex;
+    gap: 3px;
+}
+
+.pop-type-btn {
+    padding: 3px 10px;
+    font-size: 11px;
+    border-radius: 20px;
+    border: 1px solid #2a3136;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.pop-type-btn:hover {
+    border-color: #444;
+    color: #aaa;
+}
+
+.pop-type-btn--active {
+    background: #088fe1;
+    border-color: #088fe1;
+    color: #fff;
+}
+
+/* Takip Ettiklerim — yeni bölüm badge */
+.series-notif-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(103,215,75,.15);
+    border: 1px solid rgba(103,215,75,.35);
+    color: #67d74b;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Sidebar — seri badge yeşil */
+.left-menu__badge--follow {
+    background: #67d74b;
+    color: #0a1a06;
+}
+
+
+/* Live search item stilleri */
+.live-search-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background .12s;
+}
+.live-search-item:hover {
+    background: rgba(255,255,255,.05);
+}
+.live-search-cover {
+    width: 36px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    background: #1f1f2e;
+}
+.live-search-cover--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #555;
+}
+.live-search-item__text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+.live-search-item__title {
+    font-size: 13px;
+    color: #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.live-search-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 3px;
+    width: fit-content;
+}
+.live-search-badge--novel { background: #2d1f5e; color: #a78bfa; }
+.live-search-badge--manga { background: #1f3a2d; color: #6ee7b7; }

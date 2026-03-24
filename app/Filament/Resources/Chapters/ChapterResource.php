@@ -8,11 +8,12 @@ use App\Filament\Resources\Chapters\Pages\ListChapters;
 use App\Filament\Resources\Chapters\Schemas\ChapterForm;
 use App\Filament\Resources\Chapters\Tables\ChaptersTable;
 use App\Models\Chapter;
-use BackedEnum;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use BackedEnum;
 use UnitEnum;
 
 class ChapterResource extends Resource
@@ -49,5 +50,16 @@ class ChapterResource extends Resource
             'create' => CreateChapter::route('/create'),
             'edit' => EditChapter::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultUrl(EloquentModel $record): ?string
+    {
+        /** @var \App\Models\Chapter $record */
+        $params = [
+            'manga_id' => (int) $record->manga_id,
+            'chapter'  => (int) $record->chapter_number,
+        ];
+
+        return route('filament.admin.pages.manga-reader', $params);
     }
 }

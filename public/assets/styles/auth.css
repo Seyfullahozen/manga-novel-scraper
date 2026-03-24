@@ -1,0 +1,94 @@
+/* =============================================================
+   -*-header-*- Auth bar — giriş yapınca (register-link kullanılmıyor)
+   ============================================================= */
+.auth-bar {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 15px;
+    padding-right: 15px;
+    height: 65px; /* register-link ile aynı hizaya gelmesi için */
+    box-sizing: border-box;
+}
+
+.auth-bar__username {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background-color: #3c464a;
+    border-bottom: 1px solid #384146;
+    border-radius: 3px;
+    padding: 0 15px;
+    height: 35px;
+    font-size: 13px;
+    color: #9badb4;
+}
+
+.auth-bar__username .fa {
+    opacity: .6;
+}
+
+.auth-bar__username strong {
+    font-weight: 600;
+    font-size: 16px;
+    color: #e0e0e0;
+}
+
+.auth-bar__logout {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background-color: #3c464a;
+    border: none;
+    border-bottom: 1px solid #384146;
+    border-radius: 3px;
+    padding: 0 15px;
+    height: 35px;
+    font-size: 15px;
+    font-weight: 300;
+    color: #9badb4;
+    cursor: pointer;
+    transition: color .15s, background .15s;
+}
+
+.auth-bar__logout:hover {
+    background-color: #454f53;
+    color: #e88;
+}
+
+.auth-bar__logout .fa {
+    opacity: .7;
+}
+
+.auth-bar__logout strong {
+    font-weight: 600;
+}
+
+/* =============================================================
+   -*-auth-modals-*- Popup — compress.js sistemine uyumlu override
+   ============================================================= */
+
+/* Overlay: siyah değil, hafif karartma */
+.popup-bg,
+.overlay,
+[class*="popup-overlay"] {
+    background: rgba(0, 0, 0, .45) !important;
+    backdrop-filter: none !important;
+}
+
+/* Popup konumu: tam orta */
+.popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    z-index: 1000;
+}
+
+/* popup-fallback'in overlay'ini de hafiflet */
+#popup-overlay {
+    background: rgba(0, 0, 0, .45) !important;
+    backdrop-filter: none !important;
+}

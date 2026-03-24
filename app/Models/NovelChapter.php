@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Concerns\HasContentInteractions;
 
 class NovelChapter extends Model
 {
+    use HasContentInteractions;
     protected $fillable = [
         'novel_id',
         'chapter_number',
@@ -24,5 +26,10 @@ class NovelChapter extends Model
     public function novel(): BelongsTo
     {
         return $this->belongsTo(Novel::class);
+    }
+
+    public function getFilamentTitle(): string
+    {
+        return $this->title;
     }
 }

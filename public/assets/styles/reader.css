@@ -1,0 +1,231 @@
+/* =============================================================
+   Reader sayfası
+   ============================================================= */
+
+/* İçerik alanı */
+.reader-content {
+    padding: 14px;
+    background: #1b1f22;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    margin: 10px 12px;
+    line-height: 1.9;
+    color: #e6e6e6;
+    width: 700px;
+}
+
+/* Dil seçim formu */
+.reader-lang-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.reader-lang-form label {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.reader-lang-form select {
+    padding: 7px 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background: #1b1f22;
+    color: #fff;
+}
+
+.reader-lang-form .btn-apply {
+    padding: 7px 12px;
+    border-radius: 4px;
+    border: 0;
+    background: #088fe1;
+    color: #fff;
+    cursor: pointer;
+}
+
+.reader-lang-arrow {
+    color: #666;
+}
+
+.reader-lang-info {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Çeviri bekleniyor uyarısı */
+.reader-translation-pending {
+    margin-top: 10px;
+    color: #fcd02b;
+    font-size: 12px;
+}
+
+/* Prev/Next butonları */
+.reader-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 12px;
+}
+
+.reader-nav .btn-nav {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: #343c3f;
+    color: #fff;
+    text-decoration: none;
+}
+
+.reader-nav .btn-nav.disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+/* Başlık meta satırı */
+.reader-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.reader-meta a {
+    color: #67d74b;
+    text-decoration: none;
+}
+
+.reader-meta .sep {
+    opacity: .8;
+}
+
+.reader-meta .chapter-info {
+    color: #ccc;
+}
+
+.reader-meta .chapter-info span {
+    opacity: .75;
+}
+
+.reader-meta .updated-at {
+    color: #aaa;
+}
+
+/* =============================================================
+   Reader sayfası — okuma alanı sarmalayıcısı (SADECE reader'a özel)
+   novel-section'dan bağımsız — index/show ETKİLENMEZ
+   ============================================================= */
+.reader-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.reader-section .novel-section-header {
+    width: 100%;
+    max-width: 760px;
+}
+
+/* Nav bar: prev / select / next */
+.reader-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 760px;
+}
+
+.reader-nav .btn-nav {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 4px;
+    background: #343c3f;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.reader-nav .btn-nav.disabled {
+    opacity: .35;
+    pointer-events: none;
+}
+
+/* Chapter select */
+.reader-chapter-select-form {
+    flex: 1;
+    min-width: 0;
+}
+
+.reader-chapter-select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background: #1b1f22;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.reader-chapter-select:focus {
+    outline: none;
+    border-color: #088fe1;
+}
+
+/* İçerik alanı — ortalanmış */
+.reader-content {
+    width: 100%;
+    max-width: 95%;
+    padding: 20px 24px;
+    background: #1b1f22;
+    border: 1px solid #2a3136;
+    border-radius: 12px;
+    line-height: 1.9;
+    color: #e6e6e6;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+/* =============================================================
+   Manga reader
+   ============================================================= */
+.manga-reader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
+}
+
+.manga-reader__page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.manga-reader__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+}
+
+.manga-reader__empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}

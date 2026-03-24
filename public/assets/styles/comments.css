@@ -1,0 +1,749 @@
+/* =============================================================
+   Yorum & Tepki Sistemi
+   ============================================================= */
+
+/* Emoji tepkiler */
+.content-reactions {
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0 0;
+}
+
+.content-reactions__label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.content-reactions__list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.reaction-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 8px 14px;
+    background: #151a1d;
+    border: 1px solid #2a3136;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .15s;
+    min-width: 60px;
+}
+
+.reaction-btn:hover {
+    border-color: #444;
+    background: #1b2023;
+    transform: translateY(-2px);
+}
+
+.reaction-btn--active {
+    border-color: #088fe1;
+    background: rgba(8,143,225,.1);
+}
+
+.reaction-btn__emoji { font-size: 22px; line-height: 1; }
+.reaction-btn__count { font-size: 12px; font-weight: 700; color: #aaa; }
+.reaction-btn__label { font-size: 10px; color: #555; }
+.reaction-btn--active .reaction-btn__count { color: #088fe1; }
+
+/* Yorum bölümü genel */
+.comment-section {
+    margin-top: 0;
+    /*width: 90%;*/
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 0 8px;
+    border-bottom: 1px solid #1e2427;
+    margin-bottom: 16px;
+}
+
+.comment-header__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ccc;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-header__count {
+    background: #1e2427;
+    color: #666;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 400;
+}
+
+/* Yorum formu */
+.comment-form-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+}
+
+.comment-form__inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.comment-textarea {
+    width: 100%;
+    background: #0e1518;
+    border: 1px solid #2a3136;
+    border-radius: 6px;
+    color: #ccc;
+    padding: 10px 12px;
+    font-size: 13px;
+    resize: vertical;
+    min-height: 70px;
+    transition: border-color .15s;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: #088fe1;
+}
+
+.comment-form__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.comment-char-count {
+    font-size: 11px;
+    color: #444;
+    margin-right: auto;
+}
+
+.comment-submit-btn {
+    padding: 6px 16px;
+    background: #088fe1;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background .15s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.comment-submit-btn:hover { background: #0778c0; }
+
+.comment-cancel-btn {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.comment-cancel-btn:hover { border-color: #444; color: #aaa; }
+
+.comment-guest-notice {
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-guest-notice a { color: #088fe1; }
+
+/* Yorum kartı */
+.comment-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #1a1f22;
+}
+
+.comment-item--reply {
+    padding: 10px 0 10px 16px;
+    border-bottom: none;
+    border-left: 2px solid #1e2427;
+    margin-left: 8px;
+}
+
+.comment-item__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.comment-item__meta {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.comment-username {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+.comment-at {
+    font-size: 11px;
+    color: #999999;
+}
+
+.comment-date {
+    font-size: 11px;
+    color: #999999;
+    margin-left: auto;
+}
+
+/* Avatar */
+.comment-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-avatar--sm { width: 34px; height: 34px; }
+
+.comment-avatar--placeholder {
+    background: #1e2427;
+    border: 1px solid #2a3136;
+    color: #666;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Yorum metni */
+.comment-body {
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+/* Aksiyon butonları */
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-like-btn,
+.comment-dislike-btn,
+.comment-reply-btn,
+.comment-delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #999999;
+    cursor: pointer;
+    transition: all .12s;
+}
+
+.comment-like-btn:hover   { color: #4caf50; border-color: rgba(76,175,80,.3); }
+.comment-dislike-btn:hover { color: #f44336; border-color: rgba(244,67,54,.3); }
+.comment-reply-btn:hover  { color: #088fe1; border-color: rgba(8,143,225,.3); }
+.comment-delete-btn:hover { color: #f44336; }
+
+.comment-like-btn--active    { color: #4caf50 !important; border-color: rgba(76,175,80,.3) !important; }
+.comment-dislike-btn--active { color: #f44336 !important; border-color: rgba(244,67,54,.3) !important; }
+
+/* Yanıtlar */
+.comment-replies {
+    margin-top: 8px;
+}
+
+/* Boş durum */
+.comment-empty {
+    padding: 32px;
+    text-align: center;
+    color: #444;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Reply form */
+.reply-form-wrap {
+    margin: 8px 0 8px 44px;
+}
+
+/* =============================================================
+   Yorumlarım & Bildirimler sayfaları
+   ============================================================= */
+
+.my-comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #1e2427;
+    margin-bottom: 16px;
+}
+
+.my-comments-header__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ccc;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.my-comments-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.my-comments-tab {
+    padding: 4px 14px;
+    font-size: 12px;
+    border-radius: 20px;
+    border: 1px solid #2a3136;
+    background: transparent;
+    color: #666;
+    text-decoration: none;
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.my-comments-tab:hover { border-color: #444; color: #aaa; }
+
+.my-comments-tab--active {
+    background: #088fe1;
+    border-color: #088fe1;
+    color: #fff;
+}
+
+.my-comments-tab__count {
+    background: rgba(255,255,255,.15);
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+.my-comments-tab__badge {
+    background: #f44336;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Yorum kartı */
+.my-comment-card {
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    transition: border-color .15s;
+}
+
+.my-comment-card:hover { border-color: #2a3136; }
+
+.my-comment-card__source {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.my-comment-card__series-link {
+    font-size: 12px;
+    color: #088fe1;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.my-comment-card__series-link:hover { text-decoration: underline; }
+.my-comment-card__series-link--dead { font-size: 12px; color: #444; }
+
+.my-comment-card__reply-badge {
+    font-size: 10px;
+    color: #555;
+    border: 1px solid #2a3136;
+    padding: 1px 7px;
+    border-radius: 10px;
+}
+
+.my-comment-card__body {
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+
+.my-comment-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.my-comment-card__date { font-size: 11px; color: #444; }
+
+.my-comment-card__stats {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.my-comment-card__stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #444;
+}
+
+.my-comment-card__stat--like    { color: #4caf50; }
+.my-comment-card__stat--dislike { color: #f44336; }
+
+/* Bildirim kartı */
+.notif-card {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: #0e1518;
+    border: 1px solid #1e2427;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: border-color .15s;
+}
+
+.notif-card--unread {
+    border-color: rgba(8,143,225,.3);
+    background: rgba(8,143,225,.04);
+}
+
+.notif-card__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+}
+
+.notif-card__icon--like    { background: rgba(76,175,80,.15);  color: #4caf50; }
+.notif-card__icon--dislike { background: rgba(244,67,54,.15);  color: #f44336; }
+.notif-card__icon--reply   { background: rgba(8,143,225,.15);  color: #088fe1; }
+
+.notif-card__body { flex: 1; min-width: 0; }
+
+.notif-card__text {
+    font-size: 13px;
+    color: #bbb;
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+.notif-card__at { font-size: 11px; color: #444; }
+
+.notif-card__action { font-weight: 600; }
+.notif-card__action--like    { color: #4caf50; }
+.notif-card__action--dislike { color: #f44336; }
+.notif-card__action--reply   { color: #088fe1; }
+
+.notif-card__comment-preview,
+.notif-card__reply-preview {
+    font-size: 11px;
+    color: #555;
+    border-left: 2px solid #2a3136;
+    padding: 3px 8px;
+    margin: 6px 0;
+    font-style: italic;
+    word-break: break-word;
+}
+
+.notif-card__reply-preview { border-color: #088fe1; color: #667; }
+
+.notif-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+}
+
+.notif-card__date { font-size: 11px; color: #3a4347; }
+.notif-card__link { font-size: 11px; color: #088fe1; text-decoration: none; }
+.notif-card__link:hover { text-decoration: underline; }
+
+/* Sidebar badge */
+.left-menu__comments-item { position: relative; }
+
+.left-menu__comments-link { position: relative; }
+
+.left-menu__notif-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #f44336;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+    line-height: 14px;
+    pointer-events: none;
+}
+
+/* =============================================================
+   Sidebar Bildirim Popup
+   ============================================================= */
+
+.left-menu__notif-item {
+    position: relative;
+}
+
+.left-menu__badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #f44336;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 10px;
+    min-width: 16px;
+    line-height: 14px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.notif-popup {
+    display: none;
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 0;
+    width: 300px;
+    background: #0e1518;
+    border: 1px solid #2a3136;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    z-index: 999;
+    overflow: hidden;
+}
+
+.notif-popup--open {
+    display: block;
+}
+
+.notif-popup__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e2427;
+}
+
+.notif-popup__title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.notif-popup__all {
+    font-size: 11px;
+    color: #088fe1;
+    text-decoration: none;
+}
+
+.notif-popup__all:hover { text-decoration: underline; }
+
+.notif-popup__list {
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.notif-popup__loading,
+.notif-popup__empty {
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.notif-popup__item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #111618;
+    transition: background .12s;
+}
+
+.notif-popup__item:last-child { border-bottom: none; }
+
+.notif-popup__item:hover { background: #111a1e; }
+
+.notif-popup__item--unread {
+    background: rgba(8,143,225,.05);
+    border-left: 2px solid #088fe1;
+}
+
+.notif-popup__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.notif-popup__icon--like    { background: rgba(76,175,80,.15);  color: #4caf50; }
+.notif-popup__icon--dislike { background: rgba(244,67,54,.15);  color: #f44336; }
+.notif-popup__icon--reply   { background: rgba(8,143,225,.15);  color: #088fe1; }
+
+.notif-popup__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.notif-popup__actor {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+.notif-popup__label {
+    font-size: 11px;
+    color: #666;
+}
+
+.notif-popup__label--like    { color: #4caf50; }
+.notif-popup__label--dislike { color: #f44336; }
+.notif-popup__label--reply   { color: #088fe1; }
+
+.notif-popup__preview {
+    font-size: 11px;
+    color: #444;
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-left: 2px solid #2a3136;
+    padding-left: 6px;
+    margin-top: 2px;
+}
+
+.notif-popup__reply-preview {
+    font-size: 11px;
+    color: #3a6070;
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-left: 2px solid #088fe1;
+    padding-left: 6px;
+}
+
+.notif-popup__date {
+    font-size: 10px;
+    color: #333;
+    margin-top: 2px;
+}
+
+.notif-popup__foot {
+    border-top: 1px solid #1e2427;
+    padding: 8px 14px;
+}
+
+.notif-popup__goto {
+    font-size: 11px;
+    color: #555;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color .12s;
+}
+
+.notif-popup__goto:hover { color: #aaa; }
+
+/* Reply form başlığı */
+.reply-form-to {
+    font-size: 11px;
+    color: #088fe1;
+    margin-bottom: 4px;
+}
+
+/* Yanıt kime diye gösterir */
+.comment-reply-to {
+    display: inline-block;
+    font-size: 11px;
+    color: #088fe1;
+    font-weight: 600;
+    margin-bottom: 4px;
+}

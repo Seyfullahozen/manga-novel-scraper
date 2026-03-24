@@ -6,7 +6,7 @@
     <div class="updates-page max-w-7xl mx-auto">
 
         <div class="mb-8">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">
                 Son Otomatik Scrape
             </h2>
             <br>
@@ -39,7 +39,7 @@
 
                         {{-- Sağ: Manga/Novel adı + bölüm --}}
                         <div class="col-span-8">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">
                                 {{ $c['subject_title'] }}
                             </h3>
 
@@ -47,14 +47,14 @@
                                 {{ $c['type'] === 'manga' ? 'Manga' : 'Novel' }}
                             </span>
 
-                            <p class="text-sm text-gray-700 dark:text-gray-200 mt-3">
+                            <p class="text-sm text-gray-700 mt-3">
                                 Bölüm {{ $c['chapter_number'] }}
-                                <span class="text-gray-500 dark:text-gray-400">
+                                <span class="text-gray-500">
                                     — {{ $c['chapter_title'] ?: ($c['type'] === 'manga' ? "Bölüm ".$c['chapter_number'] : "Chapter ".$c['chapter_number']) }}
                                 </span>
                             </p>
 
-                            <p class="text-xs text-gray-500 dark:text-gray-400 font-mono mt-2">
+                            <p class="text-xs text-gray-500 font-mono mt-2">
                                 {{ $c['site_domain'] }}
                                 <span class="ml-2 text-gray-400">•</span>
                                 <span class="ml-2">Run #{{ $c['run_id'] }}</span>
@@ -76,7 +76,7 @@
                 <br>
             @empty
                 <div class="empty-card col-span-full">
-                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                    <div class="text-sm text-gray-600">
                         Bu aralıkta yeni bölüm yok.
                     </div>
                 </div>

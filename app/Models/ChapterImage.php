@@ -23,4 +23,9 @@ class ChapterImage extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+
+    public function getFilamentTitle(): string
+    {
+        return $this->title;
+    }
 }

@@ -55,12 +55,32 @@ services:
 
   queue:
     build: .
-    command: php artisan queue:work database --queue=default --sleep=1 --tries=1 --timeout=120 --max-jobs=50
+    command: php artisan queue:work database --queue=default --sleep=1 --tries=2 --timeout=600 --max-jobs=50 --memory=512
     restart: unless-stopped
     depends_on:
       - db
     volumes:
       - ./:/var/www/html
+
+  queue-media:
+    build: .
+    command: php artisan queue:work database --queue=media --sleep=3 --tries=3 --timeout=900 --memory=512
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    ports:
+      - "8191:8191"
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
 
 volumes:
   dbdata:

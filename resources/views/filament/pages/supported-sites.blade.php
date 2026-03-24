@@ -2,10 +2,10 @@
     <div class="sites-page max-w-7xl mx-auto">
 
         <div class="mb-8">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">
                 Desteklenen Siteler
             </h2>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-gray-600">
                 Aşağıdaki sitelerden manga ve novel içeriklerini kolayca scrape edebilirsiniz.
             </p>
             <br>
@@ -41,7 +41,7 @@
 
                         <!-- Sağ: Detaylar (8 kolon) -->
                         <div class="col-span-8">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">
                                 {{ $site['name'] }}
                             </h3>
 
@@ -49,7 +49,7 @@
                                 {{ $site['type'] === 'manga' ? 'Manga' : 'Novel' }}
                             </span>
 
-                            <p class="text-sm text-gray-500 dark:text-gray-400 font-mono mt-3">
+                            <p class="text-sm text-gray-500 font-mono mt-3">
                                 {{ $site['domain'] }}
                             </p>
 

@@ -1,8 +1,8 @@
 <x-filament-panels::page>
     <div class="nreader mx-auto max-w-3xl">
-        <div class="rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-6">
+        <div class="rounded-xl bg-white shadow-sm ring-1 ring-gray-200 p-6">
 
-            <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
+            <h1 class="text-2xl font-semibold text-gray-900 mb-6">
                 Novel Okuyucu
             </h1>
 
@@ -14,7 +14,6 @@
                         <div class="nreader-meta-icon">
                             <x-heroicon-o-clock class="w-5 h-5" />
                         </div>
-
                         <div>
                             <div class="nreader-meta-title">
                                 {{ $selectedNovel->title }}
@@ -24,25 +23,22 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="nreader-meta-right">
                         <div class="nreader-chip">
                             <span class="nreader-chip-label">Eklenme</span>
                             <span class="nreader-chip-value">
-                    {{ $selectedNovel->created_at?->format('d.m.Y H:i') ?? '-' }}
-                </span>
+                                {{ $selectedNovel->created_at?->format('d.m.Y H:i') ?? '-' }}
+                            </span>
                         </div>
-
                         <div class="nreader-chip">
                             <span class="nreader-chip-label">Son Scrape</span>
                             <span class="nreader-chip-value">
-                    {{ $selectedNovel->scraped_at?->format('d.m.Y H:i') ?? '-' }}
-                </span>
+                                {{ $selectedNovel->scraped_at?->format('d.m.Y H:i') ?? '-' }}
+                            </span>
                         </div>
                     </div>
                 </div>
             @endif
-
 
             {{-- Arama --}}
             <div class="nreader-box mb-4">
@@ -83,10 +79,26 @@
                            min="{{ $this->minChapter ?? 1 }}"
                            max="{{ $this->maxChapter ?? 999999 }}"
                            class="nreader-input">
-                    <div class="text-sm text-gray-500 dark:text-gray-400">
+
+                    {{-- Kaynak Dil --}}
+                    <select wire:model.live="srcLang" class="nreader-select" style="width:auto; min-width: 140px;">
+                        @foreach($this->languages as $code => $label)
+                            <option value="{{ $code }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+
+                    <span class="text-gray-400">→</span>
+
+                    {{-- Hedef Dil --}}
+                    <select wire:model.live="tgtLang" class="nreader-select" style="width:auto; min-width: 140px;">
+                        @foreach($this->tgtLangOptions as $code => $label)
+                            <option value="{{ $code }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+
+                    <div class="text-sm text-gray-500">
                         Min: {{ $this->minChapter ?? '-' }} | Max: {{ $this->maxChapter ?? '-' }}
                     </div>
-                    <br>
                 </div>
 
                 {{-- Navigasyon Butonları --}}
@@ -102,7 +114,7 @@
                         Sonraki Bölüm →
                     </button>
                 </div>
-            <br>
+                <br>
 
                 {{-- İçerik --}}
                 @php($chapter = $this->chapter)
@@ -113,16 +125,28 @@
                     </div>
                 @else
                     <div class="nreader-info">
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                        <h2 class="text-lg font-semibold text-gray-900">
                             {{ $chapter->title ?? ('Chapter ' . $chapter->chapter_number) }}
                         </h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-sm text-gray-600">
                             Bölüm {{ $chapter->chapter_number }}
+                            @if($tgtLang !== 'original')
+                                &mdash;
+                            {{ $this->languages[$srcLang] ?? $srcLang }}
+                            →
+                            {{ $this->languages[$tgtLang] ?? $tgtLang }}
+                            @endif
                         </p>
                     </div>
 
-                    <div class="nreader-content">
-                        {!! nl2br(e($chapter->content ?? '')) !!}
+                    <div class="nreader-content" wire:poll.3s>
+                        @if($this->translationPending)
+                            <div class="text-sm mb-3" style="opacity:.8;">
+                                Çeviri hazırlanıyor… (orijinal metin gösteriliyor)
+                            </div>
+                        @endif
+
+                        {!! nl2br(e($this->readerContent ?? '')) !!}
                     </div>
                 @endif
             @endif
@@ -130,7 +154,6 @@
     </div>
 
     <style>
-        /* SADECE bu sayfayı etkilesin diye her şeyi .nreader altına aldım */
         .nreader .nreader-box{
             padding: 12px;
             border-radius: 10px;
@@ -144,6 +167,16 @@
             margin-bottom: 6px;
             font-weight: 600;
             color: inherit;
+        }
+        .nreader .nreader-lang-label{
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            color: rgb(107 114 128);
+        }
+        .dark .nreader .nreader-lang-label{
+            color: rgb(156 163 175);
         }
         .nreader .nreader-select{
             width: 100%;
@@ -245,7 +278,6 @@
             background: rgba(255,255,255,.03);
             border-color: rgb(55 65 81);
         }
-
         .nreader .nreader-meta-left{
             display:flex;
             align-items:center;
@@ -266,7 +298,6 @@
             background: rgba(255,255,255,.08);
             color: rgb(243 244 246);
         }
-
         .nreader .nreader-meta-title{
             font-weight: 700;
             color: rgb(17 24 39);
@@ -286,7 +317,6 @@
         .dark .nreader .nreader-meta-sub{
             color: rgb(156 163 175);
         }
-
         .nreader .nreader-meta-right{
             display:flex;
             gap: 10px;
@@ -324,7 +354,6 @@
         .dark .nreader .nreader-chip-value{
             color: rgb(243 244 246);
         }
-
         @media (max-width: 640px){
             .nreader .nreader-meta{
                 flex-direction: column;
@@ -338,7 +367,6 @@
                 width: 100%;
             }
         }
-
     </style>
 
     @script

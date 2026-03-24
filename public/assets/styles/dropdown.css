@@ -1,0 +1,143 @@
+/* =============================================================
+   Dropdown — izole panel, main.min.css çakışması yok
+   ============================================================= */
+.menu-dropdown {
+    position: relative;
+}
+
+.menu-dropdown__trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    user-select: none;
+}
+
+.menu-dropdown__arrow {
+    font-size: 9px;
+    opacity: .5;
+    transition: transform .2s ease, opacity .2s;
+    display: inline-block;
+    line-height: 1;
+    margin-left: 1px;
+}
+
+.menu-dropdown.is-open .menu-dropdown__arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* Panel */
+.dropdown-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: #151a1d;
+    border: 1px solid #2a3136;
+    border-radius: 6px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03);
+    z-index: 9999;
+    padding: 6px;
+    margin-top: 0;
+    overflow: hidden;
+
+    /* Animasyon */
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+    transition: opacity .15s ease, transform .15s ease;
+    pointer-events: none;
+}
+
+.dropdown-panel.is-open {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+    animation: dropdownIn .15s ease forwards;
+}
+
+@keyframes dropdownIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Üçgen ok */
+.dropdown-panel::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 5px;
+    background: #151a1d;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-top: none;
+}
+
+/* Link item */
+.dropdown-panel__item {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    font-size: 12px;
+    color: #999;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 4px;
+    transition: background .12s, color .12s, transform .1s;
+    position: relative;
+    overflow: hidden;
+}
+
+.dropdown-panel__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 2px;
+    height: 60%;
+    background: #088fe1;
+    border-radius: 2px;
+    transition: transform .15s ease;
+}
+
+.dropdown-panel__item:hover {
+    background: rgba(255,255,255,.05);
+    color: #fff;
+    transform: translateX(2px);
+}
+
+.dropdown-panel__item:hover::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+.dropdown-panel__item img {
+    width: 14px;
+    height: 14px;
+    opacity: .5;
+    flex-shrink: 0;
+    transition: opacity .12s;
+}
+
+.dropdown-panel__item:hover img {
+    opacity: 1;
+}
+
+/* Ayırıcı */
+.dropdown-panel__divider {
+    height: 1px;
+    background: #1e2427;
+    margin: 4px 0;
+}

@@ -1,8 +1,8 @@
 <x-filament-panels::page>
     <div class="mreader mx-auto max-w-3xl">
-        <div class="rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-6">
+        <div class="rounded-xl bg-white shadow-sm ring-1 ring-gray-200 p-6">
 
-            <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">
+            <h1 class="text-2xl font-semibold text-gray-900 mb-6">
                 Manga Okuyucu
             </h1>
 
@@ -83,7 +83,7 @@
                            max="{{ $this->maxChapter ?? 999999 }}"
                            class="mreader-input">
 
-                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                    <div class="text-sm text-gray-500">
                         Min: {{ $this->minChapter ?? '-' }} | Max: {{ $this->maxChapter ?? '-' }}
                     </div>
                 </div>
@@ -111,18 +111,18 @@
                     </div>
                 @else
                     <div class="mreader-info">
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                        <h2 class="text-lg font-semibold text-gray-900">
                             {{ $chapter->title ?? ('Chapter ' . $chapter->chapter_number) }}
                         </h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <p class="text-sm text-gray-600">
                             {{ $chapter->images->count() }} görsel
                         </p>
                     </div>
 
                     <div class="space-y-3" id="imagesContainer">
-                        @foreach($chapter->images as $image)
-                            <img src="{{ $image->url }}"
-                                 alt="{{ $image->title }}"
+                        @foreach($chapter->getMedia('chapter-images')->sortBy(fn($m) => $m->getCustomProperty('order')) as $media)
+                            <img src="{{ $media->getUrl() }}"
+                                 alt="{{ $media->name }}"
                                  loading="lazy"
                                  class="w-full block rounded-lg">
                         @endforeach

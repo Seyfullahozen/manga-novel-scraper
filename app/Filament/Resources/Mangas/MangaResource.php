@@ -8,11 +8,13 @@ use App\Filament\Resources\Mangas\Pages\ListMangas;
 use App\Filament\Resources\Mangas\Schemas\MangaForm;
 use App\Filament\Resources\Mangas\Tables\MangasTable;
 use App\Models\Manga;
-use BackedEnum;
+use App\Models\Chapter;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use BackedEnum;
 use UnitEnum;
 
 class MangaResource extends Resource
@@ -49,5 +51,20 @@ class MangaResource extends Resource
             'create' => CreateManga::route('/create'),
             'edit' => EditManga::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultUrl(EloquentModel $record): ?string
+    {
+        $firstChapterNumber = Chapter::query()
+            ->where('manga_id', $record->getKey())
+            ->min('chapter_number');
+
+        $params = ['manga_id' => $record->getKey()];
+
+        if ($firstChapterNumber !== null) {
+            $params['chapter'] = (int) $firstChapterNumber;
+        }
+
+        return route('filament.admin.pages.manga-reader', $params);
     }
 }

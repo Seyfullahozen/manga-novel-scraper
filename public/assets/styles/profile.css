@@ -1,0 +1,285 @@
+/* =============================================================
+   Profil sayfası
+   ============================================================= */
+.profile-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 16px;
+}
+
+/* SOL: Avatar paneli */
+.profile-avatar-panel {
+    flex-shrink: 0;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #2a3136;
+    background: #1b1f22;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #444;
+}
+
+.profile-avatar__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+}
+
+.profile-avatar__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+.profile-avatar__username {
+    font-size: 12px;
+    color: #67d74b;
+}
+
+.profile-avatar__since,
+.profile-avatar__lastseen {
+    font-size: 11px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* SAĞ: Form paneli */
+.profile-form-panel {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-form-section {
+    background: #1b1f22;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+}
+
+.profile-form-section__title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2a3136;
+}
+
+.profile-field {
+    margin-bottom: 14px;
+}
+
+.profile-field:last-child {
+    margin-bottom: 0;
+}
+
+.profile-field__label {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.profile-field__input {
+    width: 100%;
+    background: #141719;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #e0e0e0;
+    box-sizing: border-box;
+    transition: border-color .15s;
+}
+
+.profile-field__input:focus {
+    outline: none;
+    border-color: #088fe1;
+}
+
+/* @ prefix için username alanı */
+.profile-field__prefix-wrap {
+    display: flex;
+    align-items: center;
+    background: #141719;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color .15s;
+}
+
+.profile-field__prefix-wrap:focus-within {
+    border-color: #088fe1;
+}
+
+.profile-field__prefix {
+    padding: 0 10px;
+    font-size: 14px;
+    color: #555;
+    background: #1b1f22;
+    border-right: 1px solid #2a3136;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.profile-field__input--prefixed {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+.profile-field__input--prefixed:focus {
+    outline: none;
+}
+
+.profile-field__hint {
+    display: block;
+    font-size: 11px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.profile-field__hint--warn {
+    color: #e0a030;
+}
+
+/* Alert */
+.profile-alert {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.profile-alert--success {
+    background: rgba(103, 215, 75, .1);
+    border: 1px solid rgba(103, 215, 75, .3);
+    color: #67d74b;
+}
+
+.profile-alert--error {
+    background: rgba(224, 80, 80, .1);
+    border: 1px solid rgba(224, 80, 80, .3);
+    color: #e05050;
+}
+
+/* Kaydet butonu */
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.profile-save-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    background: #088fe1;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.profile-save-btn:hover {
+    background: #0779bf;
+}
+
+/* =============================================================
+   Avatar sekme + dropzone
+   ============================================================= */
+.avatar-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.avatar-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #141719;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    color: #777;
+    font-size: 12px;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+}
+
+.avatar-tab:hover { color: #bbb; border-color: #444; }
+
+.avatar-tab--active {
+    border-color: #088fe1;
+    color: #088fe1;
+    background: rgba(8,143,225,.08);
+}
+
+.avatar-panel--hidden { display: none; }
+
+/* Dropzone */
+.avatar-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 24px;
+    background: #141719;
+    border: 2px dashed #2a3136;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+}
+
+.avatar-dropzone:hover,
+.avatar-dropzone--hover {
+    border-color: #088fe1;
+    background: rgba(8,143,225,.05);
+}
+
+.avatar-dropzone--selected { border-color: #67d74b; }
+
+.avatar-dropzone__icon { font-size: 28px; color: #444; }
+.avatar-dropzone__text { font-size: 13px; color: #888; }
+.avatar-dropzone__hint { font-size: 11px; color: #555; }

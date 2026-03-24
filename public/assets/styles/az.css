@@ -1,0 +1,43 @@
+/* =============================================================
+   Az-filter tip badge — karışık listede N / M göstergesi
+   ============================================================= */
+.az-type-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.az-type-badge--novel {
+    background: rgba(8,143,225,.2);
+    border: 1px solid rgba(8,143,225,.4);
+    color: #5bc4ff;
+}
+
+.az-type-badge--manga {
+    background: rgba(224,123,48,.2);
+    border: 1px solid rgba(224,123,48,.4);
+    color: #ffaa66;
+}
+
+/* Az-filter li a flex düzeni — badge sağa dayansın */
+.dlab-alfabe-liste li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.az-item-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

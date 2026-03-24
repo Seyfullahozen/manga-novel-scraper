@@ -26,9 +26,9 @@ class FollowedSeriesResource extends Resource
 {
     protected static ?string $model = FollowedSeries::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;
 
-    protected static ?string $recordTitleAttribute = 'FollowedSeries.php';
+    protected static ?string $recordTitleAttribute = 'id';
 
     public static function form(Schema $schema): Schema
     {

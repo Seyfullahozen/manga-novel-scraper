@@ -8,11 +8,12 @@ use App\Filament\Resources\NovelChapters\Pages\ListNovelChapters;
 use App\Filament\Resources\NovelChapters\Schemas\NovelChapterForm;
 use App\Filament\Resources\NovelChapters\Tables\NovelChaptersTable;
 use App\Models\NovelChapter;
-use BackedEnum;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use BackedEnum;
 use UnitEnum;
 
 class NovelChapterResource extends Resource
@@ -22,7 +23,7 @@ class NovelChapterResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static string | UnitEnum | null $navigationGroup = 'Novels';
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema
     {
@@ -64,4 +65,16 @@ class NovelChapterResource extends Resource
     {
         return false;
     }
+
+    public static function getGlobalSearchResultUrl(EloquentModel $record): ?string
+    {
+        /** @var \App\Models\NovelChapter $record */
+        $params = [
+            'novel_id' => (int) $record->novel_id,
+            'chapter'  => (int) $record->chapter_number,
+        ];
+
+        return route('filament.admin.pages.novel-reader', $params);
+    }
+
 }

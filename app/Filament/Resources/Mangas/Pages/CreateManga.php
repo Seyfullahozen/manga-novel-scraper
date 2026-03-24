@@ -23,9 +23,7 @@ class CreateManga extends CreateRecord
                 ->label('Scrape Et')
                 ->action(function (DriverResolver $resolver) {
 
-                    \Log::info('CREATE_MANGA_ACTION_FIRED');
                     Notification::make()->title('ACTION ÇALIŞTI ✅')->success()->send();
-
                     $data = $this->form->getState();
 
                     if (empty($data['url'])) {

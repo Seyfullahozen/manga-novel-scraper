@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\Services\NovelScraping\Drivers\Local\NovelbinDriver;
-use App\Services\NovelScraping\Drivers\Local\EmpireNovelDriver;
-use App\Services\NovelScraping\Drivers\Local\NovelOkutrDriver;
 use App\Services\NovelScraping\DriverResolver;
 use Illuminate\Support\ServiceProvider;
 

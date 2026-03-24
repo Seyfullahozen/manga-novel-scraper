@@ -9,6 +9,6 @@ Artisan::command('inspire', function () {
 });
 
 Schedule::command('scrape:refresh')
-    ->dailyAt('14:05');
+    ->dailyAt('10:16');
 //Schedule::command('scrape:refresh')
 //    ->dailyAt('16:45');

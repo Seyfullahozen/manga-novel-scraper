@@ -1,0 +1,371 @@
+/* =============================================================
+   Novel/Manga Grid — kart listesi (css grid)
+   ============================================================= */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+}
+
+/* Kart */
+.card {
+    position: relative;
+    background: #1e2528;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color .15s;
+}
+
+.card:hover {
+    border-color: #444;
+}
+
+.card.new-episode {
+    border-color: #7be461;
+    box-shadow: 0 0 14px 0 #7de663 inset;
+}
+
+/* Kartın tıklanabilir ana alanı */
+.card__inner {
+    display: flex;
+    flex-direction: column;   /* 🔥 dikey */
+    align-items: center;      /* ortala */
+    gap: 8px;
+    padding: 12px 12px 34px;
+    text-align: center;
+}
+
+.card__inner img {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.card__title {
+    font-size: 13px;
+    color: #e0e0e0;
+    line-height: 1.4;
+    display: block;
+}
+
+/* Chapter bar: kartın altına yapışık */
+.card__chapter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #aaa;
+    background: rgba(0,0,0,.22);
+    border-top: 1px solid rgba(255,255,255,.05);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background .15s;
+}
+
+a.card__chapter:hover {
+    background: rgba(0,0,0,.36);
+    color: #ccc;
+}
+
+/* =============================================================
+   BADGE — eski tüm badge kurallarını sil, sadece bunu koy
+   ============================================================= */
+.badge {
+    position: absolute;
+    z-index: 2;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 3px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    top: 5px;
+    right: 5px;    /* default: sağ üst */
+}
+
+/* "yeni" — SAĞ üst (default ile aynı, override gerek yok) */
+.badge--new {
+    background: #67d74b;
+    color: #0a1a06;
+}
+
+/* Novel / Manga tipi — SOL üst, küçük */
+.badge--type {
+    right: auto !important;
+    left: 5px !important;
+    top: 5px !important;
+    font-size: 9px;
+    padding: 2px 5px;
+}
+
+.badge--type-novel {
+    background: rgba(8,143,225,0.85);
+    border: 1px solid rgba(8,143,225,1);
+    color: #e6f6ff;
+}
+
+.badge--type-manga {
+    background: rgba(224,123,48,0.85);
+    border: 1px solid rgba(224,123,48,1);
+    color: #fff3e6;
+}
+
+/* Rating — SOL üst */
+.badge--rating {
+    right: 5px !important;
+    left: auto !important;
+    top: 5px !important;
+    background: rgba(255,200,0,0.85);
+    border: 1px solid rgba(255,200,0,1);
+    color: #fff8e1;
+}
+
+/* active */
+.badge--active {
+    background: #088fe1;
+    color: #fff;
+}
+
+/* Boş durum */
+.card--empty {
+    padding: 14px;
+    border-style: dashed;
+}
+
+
+/* =============================================================
+   Chapter List — bölüm listesi (show + reader)
+   ul/li burada semantik olarak doğru
+   ============================================================= */
+.chapter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chapter-list__item a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #1e2528;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #ccc;
+    transition: border-color .15s, background .15s;
+}
+
+.chapter-list__item a:hover {
+    background: #252b2e;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+.chapter-list__item--active a {
+    border-color: #67d74b;
+    box-shadow: 0 0 12px 0 #67d74b inset;
+}
+
+.chapter-list__num {
+    font-size: 12px;
+    color: #888;
+    white-space: nowrap;
+}
+
+.chapter-list__title {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.chapter-sub-title {
+    font-size: 13px;
+    font-weight: normal;
+    color: #aaa;
+}
+
+
+/* =============================================================
+   Novel List Grid — novel-followed, reading-history ve manga-list için
+   ============================================================= */
+.novel-list-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.novel-list-search {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    background: #1b1f22;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.novel-list-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    color: #e0e0e0;
+    font-size: 13px;
+}
+
+.novel-list-search input::placeholder { color: #555; }
+
+.novel-list-search button {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    color: #666;
+    cursor: pointer;
+    transition: color .15s;
+}
+
+.novel-list-search button:hover { color: #aaa; }
+
+.novel-list-count {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+}
+
+.novel-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+}
+
+.novel-list-card {
+    position: relative;
+    background: #1e2528;
+    border: 1px solid #2a3136;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color .15s, transform .15s;
+}
+
+.novel-list-card:hover {
+    border-color: #444;
+    transform: translateY(-2px);
+}
+
+.novel-list-card__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 10px 40px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.novel-list-card__cover {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
+    display: block;
+}
+
+.novel-list-card__title {
+    font-size: 12px;
+    color: #ddd;
+    text-align: center;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+/* =============================================================
+   Chapter List — İlk/Son buton & Daha fazla göster
+   ============================================================= */
+
+.chapter-jump-btns {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.chapter-jump-btn {
+    padding: 4px 12px;
+    font-size: 11px;
+    border-radius: 4px;
+    border: 1px solid #2a3136;
+    background: #0e1518;
+    color: #888;
+    text-decoration: none;
+    transition: all .15s;
+    white-space: nowrap;
+}
+
+.chapter-jump-btn:hover {
+    border-color: #088fe1;
+    color: #088fe1;
+    background: rgba(8,143,225,.07);
+}
+
+.chapter-jump-btn--last {
+    border-color: rgba(103,215,75,.3);
+    color: #67d74b;
+    background: rgba(103,215,75,.05);
+}
+
+.chapter-jump-btn--last:hover {
+    border-color: #67d74b;
+    background: rgba(103,215,75,.12);
+    color: #67d74b;
+}
+
+/* Gizli bölümler */
+.chapter-list__item--hidden {
+    display: none !important
+}
+
+/* Daha Fazla Göster butonu */
+.chapter-show-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 16px;
+    background: #0e1518;
+    border: 1px solid #2a3136;
+    border-radius: 10px;
+    color: #888;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .15s;
+    box-sizing: border-box;
+}
+
+.chapter-show-more-btn:hover {
+    border-color: #088fe1;
+    color: #088fe1;
+    background: rgba(8,143,225,.07);
+}
+
+.chapter-show-more-btn__count {
+    color: #555;
+    font-size: 11px;
+}

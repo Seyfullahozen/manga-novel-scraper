@@ -8,12 +8,11 @@ use App\Models\ChapterImage;
 use App\Models\ScrapeRun;
 use App\Models\ScrapeRunEvent;
 use Psr\Log\LoggerInterface;
-use Illuminate\Support\Facades\DB;
 use App\Services\MangaScraping\DriverResolver;
+use Illuminate\Support\Str;
 
 class ScrapeMangaFromUrl
 {
-
     public function __construct(
         private readonly DriverResolver  $resolver,
         private readonly LoggerInterface $log,
@@ -43,6 +42,27 @@ class ScrapeMangaFromUrl
             ]);
         }
 
+        // ✅ Cover & description meta
+        if (method_exists($driver, 'parseMangaMeta')) {
+            $meta = $driver->parseMangaMeta($url);
+
+            $manga->update(array_filter([
+                'cover_url'   => $meta['cover_url'] ?? null,
+                'description' => $meta['description'] ?? null,
+            ], fn($v) => $v !== null));
+
+            // ✅ Cover'ı indir ve medialibrary'e kaydet
+            if (!empty($meta['cover_url'])) {
+                try {
+                    $manga->addMediaFromUrl($meta['cover_url'])
+                        ->usingFileName(Str::slug($manga->title) . '.webp')
+                        ->toMediaCollection('cover');
+                } catch (\Exception $e) {
+                    $this->log->warning('Cover indirilemedi: ' . $e->getMessage(), ['manga_id' => $manga->id]);
+                }
+            }
+        }
+
         $this->runEvent($runId, 'success', '3 Manga kaydı hazır.', [
             'manga_id' => $manga->id,
             'title' => $manga->title,
@@ -66,15 +86,14 @@ class ScrapeMangaFromUrl
             );
             $images = $driver->parseImages($chapter->url);
             foreach ($images as $image) {
-
                 ChapterImage::updateOrCreate(
                     [
                         'chapter_id' => $chapter->id,
-                        'order' => $image['order'],
+                        'order'      => $image['order'],
                     ],
                     [
-                        'title' => $image['alt'],
-                        'url' => $image['url'],
+                        'title' => $image['alt'] ?? null,
+                        'url'   => $image['url'],
                     ]
                 );
             }

@@ -9,6 +9,7 @@ use App\Models\ScrapeRun;
 use Illuminate\Support\Facades\DB;
 use App\Models\ScrapeRunEvent;
 use App\Services\NovelScraping\DriverResolver;
+use Illuminate\Support\Str;
 
 class ScrapeNovelFromUrl
 {
@@ -41,9 +42,30 @@ class ScrapeNovelFromUrl
             ]);
         }
 
+        // ✅ Author & cover meta
+        if (method_exists($driver, 'parseNovelMeta')) {
+            $meta = $driver->parseNovelMeta($url);
+            $novel->update(array_filter([
+                'author'    => $meta['author']    ?? null,
+                'cover_url' => $meta['cover_url'] ?? null,
+            ], fn($v) => $v !== null));
+
+            // ✅ Cover'ı indir ve medialibrary'e kaydet
+            if (!empty($meta['cover_url'])) {
+                try {
+                    $novel->addMediaFromUrl($meta['cover_url'])
+                        ->usingFileName(Str::slug($novel->title) . '.webp')
+                        ->toMediaCollection('cover');
+                } catch (\Exception $e) {
+                    $this->log->warning('Cover indirilemedi: ' . $e->getMessage(), ['novel_id' => $novel->id]);
+                }
+            }
+        }
+
         $this->runEvent($runId, 'success', '3 Novel kaydı hazır.', [
             'novel_id' => $novel->id,
-            'title' => $novel->title,
+            'title'    => $novel->title,
+            'author'   => $novel->author,
         ]);
 
         $this->runEvent($runId, 'info', '4 Bölüm listesi alınıyor…');
